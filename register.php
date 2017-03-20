@@ -24,27 +24,22 @@ include 'defaultscripts.php';
         <h2 class="form-signin-heading, text-center">Wiggly Piggly <br>User Registration</h2>
           <!--These labels are screen reader only, not sure if they are required...-->
       <label for="inputFirstName" class="sr-only">First Name</label>
-      <span class="label label-info">First Name</span>
       <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" name="inputFirstName" value="" required>
 
           <label for="inputLastName" class="sr-only">Last Name</label>
-          <span class="label label-info">Last Name</span>
           <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" name="inputLastName" value="" required>
 
         <label for="inputEmail" class="sr-only">Email address</label>
-          <span class="label label-info">Email</span>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" value="" required autofocus>
             <!--May or may not need these form groups, left them since the code I found had them...-->
           <div class="form-group">
-              <span class="label label-info">Password</span>
               <!--When it comes to the password fields I decided a minimum length of 6 was good, can be changed. The form will not
               allow a submission if the passwords do not match-->
               <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
               <div class="help-block">Minimum of 6 characters</div>
           </div>
           <div class="form-group">
-              <span class="label label-info">Confirm Password</span>
-              <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these passwords don't match" placeholder="Confirm" required>
+              <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these passwords don't match" placeholder="Confirm Password" required>
               <div class="help-block with-errors"></div>
           </div>
           <!--This button is locked until all fields are filled, email is of proper form, and the two password fields agree-->
