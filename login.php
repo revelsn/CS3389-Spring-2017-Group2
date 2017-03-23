@@ -31,9 +31,9 @@ include 'defaultscripts.php';
       <form class="form-signin" action="DBaccess.php" method="post">
         <h2 class="form-signin-heading, text-center">Wiggly Piggly Sign-in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" value="" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" value="edwiden96@gmail.com" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="inputPassword" value="" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="inputPassword" value="NatsuMarsh2016" required>
         <div class="checkbox">
           <label>
               <input type="checkbox" value="remember-me"> Remember me
@@ -51,16 +51,13 @@ include 'defaultscripts.php';
           );
 
           $error_id = isset($_GET['err']) ? (int)$_GET['err'] : 0;
-          if ($error_id != 0 && isset($error_id)) {
+          if (isset($error_id) && array_key_exists($error_id, $errors)) {
               echo '<div class="alert alert-danger" role="alert">'.$errors[$error_id].'</div>';
           }
 
           ?>
 
       </form>
-
-<?php var_dump(get_defined_vars());
-        ?>
 
     </div> <!-- /container -->
   </body>

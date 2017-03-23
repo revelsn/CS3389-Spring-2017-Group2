@@ -10,12 +10,13 @@
  * Lots of work to do on this file, simply copy and pasted from customerDash with a few minor changes so far.
  */
 session_start(); //starting the session for user login page
-include "defaultscripts.php";
 
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["user"]) || $_SESSION['role'] != 1) {
+    require_once('logout.php');
     header("location:login.php?err=3");
     die();
- }
+}
+include "defaultscripts.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

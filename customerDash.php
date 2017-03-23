@@ -1,9 +1,24 @@
 <?php session_start(); //starting the session for user login page
+//if user is not signed in or does not have the correct permission (roleID)
+//then log them out and toss them to login page with error
+include "Database.php";
+include "Order.php";
+include "DBInventory.php";
 include "defaultscripts.php";
 
-if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
+    require_once('logout.php');
     header("location:login.php?err=3");
     die();
+}
+//if user just added an item then add to order
+if(isset($_GET['action']) && $_GET['action']=="add") {
+    //check to see if customer is creating a new order or adding to order
+    if (!isset($_SESSION['currentOrder'])) {
+        //Customer is adding the first item to an order, so we need to create an order in the db,
+        //create an orderLine in the db for this item, and attach the order to this customer
+        include_once "createOrder.php";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -64,7 +79,6 @@ if (!isset($_SESSION["user"])) {
         <div class="col-md-8">
             <div class="row">
                 <?php
-                require_once('DBInventory.php');
                 echo returnInStockInv();
                 ?>
             </div>
