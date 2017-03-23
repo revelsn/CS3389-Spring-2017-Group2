@@ -41,14 +41,14 @@ if(isset($email)){
 
     }
 
-    else{
-        //else the user does not exist in the db
-        echo "<h1>user does not exist</h1>";
-        //prepare and execute SQL INSERT for this new user
-        $stmt = $pdo->prepare('INSERT INTO `Users` (`firstName`, `lastName`, `email`, `passwordHash`) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$first, $last, $email, $pass]);
-        //currently this sets the roleID to the default value of 0, might need to be changed in the future...
-    }
+else{
+    //else the user does not exist in the db
+    echo "<h1>user does not exist</h1>";
+    //prepare and execute SQL INSERT for this new user
+    $stmt = $pdo->prepare('INSERT INTO `Users` (`firstName`, `lastName`, `email`, `passwordHash`) VALUES (?, ?, ?, ?)');
+    $stmt->execute([$first, $last, $email, $pass]);
+    //currently this sets the roleID to the default value of 0, might need to be changed in the future...
+}
 
 
 

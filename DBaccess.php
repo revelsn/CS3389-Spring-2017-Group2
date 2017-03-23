@@ -29,11 +29,11 @@ function SignIn()
     //if the hashes match along with the email then....
     if ($row['PasswordHash'] == $pass && $row['email'] == $email)
 	{
-		//echo out success message
-		echo '<h1>Successful login, email and hash matches</h1>';
+		//send user to customerDash
+		header("location:customerDash.php");
 	} else {
-    	//else echo out error message, neither look pretty right now...
-    	echo '<h1>Unsuccessful login, email or hash does not match</h1>';
+        //return the user to the login page with an error code of 2
+        header("location:login.php?err=2");
 	}
 
 }

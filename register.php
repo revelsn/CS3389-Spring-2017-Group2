@@ -19,6 +19,9 @@ include 'defaultscripts.php';
   <body>
 
     <div class="container">
+        <form action="login.php">
+            <button class="btn btn-sm btn-success" type="submit" style="float: right">Sign in</button>
+        </form>
         <!-- This form has first name, last name, email, password, and password confirm fields for the user to input info -->
       <form class="form-signin" action="DBUserRegister.php" method="post" data-toggle="validator">
         <h2 class="form-signin-heading, text-center">Wiggly Piggly <br>User Registration</h2>

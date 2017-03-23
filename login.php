@@ -26,7 +26,9 @@ include 'defaultscripts.php';
   <body>
 
     <div class="container">
-
+        <form action="register.php">
+            <button class="btn btn-sm btn-success" type="submit" style="float: right">Sign up</button>
+        </form>
       <form class="form-signin" action="DBaccess.php" method="post">
         <h2 class="form-signin-heading, text-center">Wiggly Piggly Sign-in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -35,11 +37,28 @@ include 'defaultscripts.php';
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="inputPassword" value="" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+              <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <?php
+          // this php code creates an array which currently holds one error, but could hold more, and
+          // adds an alert div. If an alert is passed to this page via the GET variable then the div appears
+          // and appears to the user. The error will appear if the email and/or password hash in the db
+          // does not match the info given by the user
+          $errors = array (
+              2 => "Failed Authentication! Try again."
+          );
+
+          $error_id = isset($_GET['err']) ? (int)$_GET['err'] : 0;
+          if ($error_id != 0 && isset($error_id)) {
+              echo '<div class="alert alert-danger" role="alert">'.$errors[$error_id].'</div>';
+          }
+          ?>
+
       </form>
+
+
 
     </div> <!-- /container -->
   </body>
