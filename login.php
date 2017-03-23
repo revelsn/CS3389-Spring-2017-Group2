@@ -1,3 +1,4 @@
+<?php session_start(); //starting the session for user login page ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +16,7 @@
  * to the DBaccess.php file but will ultimately direct to the individual dashboard pages for the 3 roles. The webpage
  * uses a form with two fields, email and password, to gather info and pass along that data to a php file that will
  * hash the password and check that data against the db for a user account.
- * TODO: Currently no logic for when the user is not found
  * TODO: Remember me checkbox does not work
- * TODO: Currently this page does not send a user to a dashboard, it is only doing basic authentication against the db
  */
 include 'defaultscripts.php';
 ?>
@@ -47,18 +46,21 @@ include 'defaultscripts.php';
           // and appears to the user. The error will appear if the email and/or password hash in the db
           // does not match the info given by the user
           $errors = array (
-              2 => "Failed Authentication! Try again."
+              2 => "Failed Authentication! Try again.",
+              3 => "You need to login to access that page."
           );
 
           $error_id = isset($_GET['err']) ? (int)$_GET['err'] : 0;
           if ($error_id != 0 && isset($error_id)) {
               echo '<div class="alert alert-danger" role="alert">'.$errors[$error_id].'</div>';
           }
+
           ?>
 
       </form>
 
-
+<?php var_dump(get_defined_vars());
+        ?>
 
     </div> <!-- /container -->
   </body>

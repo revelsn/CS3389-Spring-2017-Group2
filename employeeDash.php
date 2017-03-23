@@ -1,10 +1,21 @@
-<?php session_start(); //starting the session for user login page
+<?php
+/**
+ * Created by PhpStorm.
+ * User: EDWid
+ * Date: 3/23/2017
+ * Time: 11:59 AM
+ *
+ *
+ *
+ * Lots of work to do on this file, simply copy and pasted from customerDash with a few minor changes so far.
+ */
+session_start(); //starting the session for user login page
 include "defaultscripts.php";
 
 if (!isset($_SESSION["user"])) {
     header("location:login.php?err=3");
     die();
-}
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +25,7 @@ if (!isset($_SESSION["user"])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Wiggly Piggly User Dashboard</title>
+    <title>Wiggly Piggly Employee Dashboard</title>
 
 
     <!-- Custom styles for this template -->
@@ -36,15 +47,15 @@ if (!isset($_SESSION["user"])) {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="#">Create Order</a>
+                            <a href="#">Inventory Manager</a>
                         </li>
                         <li>
-                            <a href="#">Order History</a>
+                            <a href="#">View Orders</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">*Customer Name*<strong class="caret"></strong></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">*Employee Name*<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="#">Profile</a>

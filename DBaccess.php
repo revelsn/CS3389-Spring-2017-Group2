@@ -5,7 +5,7 @@
 //This is only intended as a test page for checking hashes and emails and access to the db.
 function SignIn()
 {
-	session_start();   //starting the session for user login page
+    session_start();
     $DB_HOST = '35.184.123.250';
     $DB_NAME = 'wigglydb';
     $DB_USER = 'web';
@@ -30,10 +30,12 @@ function SignIn()
     if ($row['PasswordHash'] == $pass && $row['email'] == $email)
 	{
 		//send user to customerDash
+        $_SESSION["user"] = $email;
 		header("location:customerDash.php");
 	} else {
         //return the user to the login page with an error code of 2
         header("location:login.php?err=2");
+        $_SESSION["user"] = "";
 	}
 
 }
