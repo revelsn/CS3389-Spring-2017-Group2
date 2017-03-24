@@ -32,6 +32,9 @@ include 'defaultscripts.php';
           <label for="inputLastName" class="sr-only">Last Name</label>
           <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" name="inputLastName" value="" required>
 
+          <label for="inputTelephone" class="sr-only">Telephone Number</label>
+          <input type="text" id="inputTelephone" class="form-control" placeholder="123-456-8910" name="inputTelephone" value="" required>
+
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" value="" required autofocus>
             <!--May or may not need these form groups, left them since the code I found had them...-->

@@ -23,7 +23,11 @@ function returnInStockInv() {
             <h3><span class=\"label label-info\" style=\"display: block\">".
             $row['itemName'].
             "</span></h3><img alt='Bootstrap Image Preview' src='grocery_dummy.jpg' class='img-responsive center-block'/>
-                   <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a></div>";
+            <h3><span class=\"label label-warning\" >$".
+            $row['price'].
+            "</span></h3>
+                   <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
+                   </div>";
     }
 
     return $html;

@@ -4,6 +4,7 @@
 include "Database.php";
 include "Order.php";
 include "DBInventory.php";
+include "getCurrentOrder.php";
 include "defaultscripts.php";
 
 if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
@@ -18,6 +19,8 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
         //Customer is adding the first item to an order, so we need to create an order in the db,
         //create an orderLine in the db for this item, and attach the order to this customer
         include_once "createOrder.php";
+    } else {
+        include_once  "addToOrder.php";
     }
 }
 ?>
@@ -77,6 +80,7 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
     </div>
     <div class="row">
         <div class="col-md-8">
+            <div class="row" ><?php var_dump(get_defined_vars())?></div>
             <div class="row">
                 <?php
                 echo returnInStockInv();
@@ -91,90 +95,20 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
                 <thead>
                 <tr>
                     <th>
-                        #
-                    </th>
-                    <th>
                         Product
                     </th>
                     <th>
-                        Payment Taken
+                        Subtotal
                     </th>
                     <th>
-                        Status
+                        Quantity
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        TB - Monthly
-                    </td>
-                    <td>
-                        01/04/2012
-                    </td>
-                    <td>
-                        Default
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        TB - Monthly
-                    </td>
-                    <td>
-                        01/04/2012
-                    </td>
-                    <td>
-                        Approved
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        TB - Monthly
-                    </td>
-                    <td>
-                        02/04/2012
-                    </td>
-                    <td>
-                        Declined
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        3
-                    </td>
-                    <td>
-                        TB - Monthly
-                    </td>
-                    <td>
-                        03/04/2012
-                    </td>
-                    <td>
-                        Pending
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        4
-                    </td>
-                    <td>
-                        TB - Monthly
-                    </td>
-                    <td>
-                        04/04/2012
-                    </td>
-                    <td>
-                        Call in to confirm
-                    </td>
-                </tr>
+                <?php
+                echo returnCurrentOrderItems();
+                ?>
                 </tbody>
             </table> <h3><span class="label label-primary" style="display: block">Total: $1.99</span></h3>
             <button type="button" class="btn btn-primary btn-lg btn-block">

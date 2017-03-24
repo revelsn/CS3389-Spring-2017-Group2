@@ -11,6 +11,22 @@
  */
 // Initialize the session.
 session_start();
+include "Database.php";
+$db = new Database();
+$db->_construct();
+//get order being worked on
+$db->query('SELECT orderID FROM Orders WHERE customerID = :customerID AND status = "In Progress"');
+$db->bind(':customerID', $_SESSION["user"]);
+//grab that *hopefully* single order...
+$row = $db->single();
+//delete orderlines pertaining to order being worked on
+$db->query('DELETE FROM OrderLine WHERE orderID = :orderID');
+$db->bind(':orderID', $row['orderID']);
+$db->execute();
+//delete order itself
+$db->query('DELETE FROM Orders WHERE orderID = :orderID');
+$db->bind(':orderID', $row['orderID']);
+$db->execute();
 
 // Unset all of the session variables.
 $_SESSION = array();
