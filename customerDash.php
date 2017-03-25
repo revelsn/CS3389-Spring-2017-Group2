@@ -4,9 +4,13 @@
 include "Database.php";
 include "Order.php";
 include "DBInventory.php";
-include "getCurrentOrder.php";
 include "defaultscripts.php";
-
+$order = "";
+if (!isset($_SESSION['currentOrder'])) {
+    $order = new Order();
+} else {
+    $order = unserialize($_SESSION['currentOrder']);
+}
 if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
     require_once('logout.php');
     header("location:login.php?err=3");
@@ -18,9 +22,11 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
     if (!isset($_SESSION['currentOrder'])) {
         //Customer is adding the first item to an order, so we need to create an order in the db,
         //create an orderLine in the db for this item, and attach the order to this customer
-        include_once "createOrder.php";
+        $order->setCustomerID($_SESSION['user']);
+        $order->createOrder();
+        $_SESSION['currentOrder'] = serialize($order);
     } else {
-        include_once  "addToOrder.php";
+        $order->addToOrder();
     }
 }
 ?>
@@ -107,10 +113,10 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
                 </thead>
                 <tbody>
                 <?php
-                echo returnCurrentOrderItems();
+                echo $order->returnCurrentOrderItems();
                 ?>
                 </tbody>
-            </table> <h3><span class="label label-primary" style="display: block">Total: $1.99</span></h3>
+            </table> <h3><span class="label label-primary" style="display: block"><?php echo "Total: $".$order->getRunningTotal();?></span></h3>
             <button type="button" class="btn btn-primary btn-lg btn-block">
                 Submit Order
             </button>
