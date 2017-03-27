@@ -1,21 +1,24 @@
 <?php session_start(); //starting the session for user login page
 //if user is not signed in or does not have the correct permission (roleID)
 //then log them out and toss them to login page with error
+include "defaultscripts.php";
 include "Database.php";
 include "Order.php";
 include "DBInventory.php";
-include "defaultscripts.php";
+//user check should happen before checking for order
+if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
+    require_once('logout.php');
+    header("location:login.php?err=3");
+    die();
+}
+//unserialize order if set else create new order object.
 $order = "";
 if (!isset($_SESSION['currentOrder'])) {
     $order = new Order();
 } else {
     $order = unserialize($_SESSION['currentOrder']);
 }
-if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
-    require_once('logout.php');
-    header("location:login.php?err=3");
-    die();
-}
+
 //if user just added an item then add to order
 if(isset($_GET['action']) && $_GET['action']=="add") {
     //check to see if customer is creating a new order or adding to order
@@ -24,10 +27,11 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
         //create an orderLine in the db for this item, and attach the order to this customer
         $order->setCustomerID($_SESSION['user']);
         $order->createOrder();
-        $_SESSION['currentOrder'] = serialize($order);
     } else {
         $order->addToOrder();
+
     }
+    $_SESSION['currentOrder'] = serialize($order);
 }
 ?>
 <!DOCTYPE html>
@@ -47,6 +51,8 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
 
 <body>
 <div class="container-fluid">
+    <!--See customerOrderHistory.php for comment on the div code below this tag, TLDR, it may need to be dynamically
+    generated to reduce duplicate code-->
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -60,10 +66,10 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="#">Create Order</a>
+                            <a href="customerDash.php">Create Order</a>
                         </li>
                         <li>
-                            <a href="#">Order History</a>
+                            <a href="customerOrderHistory.php">Order History</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
