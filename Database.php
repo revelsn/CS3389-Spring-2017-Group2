@@ -26,6 +26,10 @@ class Database
     private $error = "";
     private $stmt = "";
 
+    /**
+     * This method constructs the database connection and needs to be called before
+     * any other methods are used in this class
+     */
     public function _construct()
     {
         //Set DSN
@@ -45,11 +49,21 @@ class Database
         }
     }
 
+    /**
+     * This method sets up a query for this database, no params are dealt with here.
+     * @param $query - this is the string that will be sent to the db
+     */
     public function query($query)
     {
         $this->stmt = $this->dbh->prepare($query);
     }
 
+    /**
+     * This method binds params to values and sets the type with the last param
+     * @param $param - this is the param in the query
+     * @param $value - this is the value that should be filled in the query
+     * @param null $type - this is the type of the value inserted into the query
+     */
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
@@ -70,9 +84,20 @@ class Database
         $this->stmt->bindValue($param, $value, $type);
 
     }
+
+    /**
+     * This method executes the query to the db
+     * @return mixed - returns from the db an array of values from the db, either multi dimensional
+     * or single
+     */
     public function execute(){
         return $this->stmt->execute();
     }
+
+    /**
+     * This method returns a multidimensional array
+     * @return mixed
+     */
     public function resultset(){
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);

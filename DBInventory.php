@@ -11,7 +11,7 @@ function returnInStockInv() {
     $db = new Database();
     $db->_construct();
     //setup query and bind params
-    $db->query('SELECT itemID, itemName, price, outOfStock FROM Items WHERE outOfStock = 0');
+    $db->query('SELECT itemID, itemName, price, outOfStock FROM Items WHERE outOfStock = "N"');
     //request the entire table
     $table = $db->resultset();
 
