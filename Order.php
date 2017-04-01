@@ -14,8 +14,26 @@ class Order
     private $submitTime = "";
     private $status = "";
     private $pickUpTime = "";
-
+    private $customerName = "";
     private $runningTotal = "0.00";
+
+    /**
+     * @return string
+     */
+    public function getCustomerName()
+    {
+
+        return $this->customerName;
+    }
+
+    /**
+     * @param string $customerName
+     */
+    public function setCustomerName($customerName)
+    {
+        $this->customerName = $customerName;
+    }
+
 
     /**
      * @return string
@@ -282,4 +300,33 @@ class Order
         //TODO May try killing two birds by logging users out and then back in when they closed the browser window,
         //TODO which may require additional table to maintain sessions or column in users table.
     }
+
+    function returnOrderHistory() {
+
+        //create database object
+        $db = new Database();
+        $db->_construct();
+        //setup query and bind params
+        //get order being worked on
+        $db->query('SELECT * FROM Orders WHERE customerID = :customerID AND status = "Picked Up"');
+        $db->bind(':customerID', $_SESSION["user"]);
+        //request the entire table
+        $table = $db->resultset();
+        $html = "";
+        //loop through all the items the query found and create some HTML code to show it to the customer
+        foreach ($table as $row) {
+            $html .= "<tr>
+                    <td>".$row['orderID']."</td>
+                    <td>".$row['submitTime']."</td>
+                    <td>".$row['pickUpTime']."</td>
+                    <td>" ."Items in Order..."."</td>
+                    <td>"."Price..."."</td>
+                    </tr>";
+        }
+
+        return $html;
+    }
 }
+
+
+

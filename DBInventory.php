@@ -17,9 +17,8 @@ function returnInStockInv() {
 
     $html = "";
     //loop through all the items the query found and create some HTML code to show it to the customer
-    //this code is almost completely nonfunctional, only for visuals right now.
     foreach ($table as $row) {
-        $html .= " <div class=\"col-md-3\">
+        $html .= "<div class=\"col-md-3\">
             <h3><span class=\"label label-info\" style=\"display: block\">".
             $row['itemName'].
             "</span></h3><img alt='Bootstrap Image Preview' src='grocery_dummy.jpg' class='img-responsive center-block'/>

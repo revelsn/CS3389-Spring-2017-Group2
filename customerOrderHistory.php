@@ -6,6 +6,23 @@
  * Time: 7:07 PM
  */
 include "defaultscripts.php";
+include "Database.php";
+include "Order.php";
+include "DBInventory.php";
+
+//if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
+//    require_once('logout.php');
+//    header("location:login.php?err=3");
+//    die();
+//}
+
+//unserialize order if set else create new order object.
+$order = "";
+if (!isset($_SESSION['currentOrder'])) {
+    $order = new Order();
+} else {
+    $order = unserialize($_SESSION['currentOrder']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +42,7 @@ include "defaultscripts.php";
 <body>
 
 <div class="container-fluid">
+
     <!--This navigation bar code, the div below this comment, should probably be moved into a file that gets called
     because it is simply duplicate code that will appear in all of the customer pages with minor variations,
     such as which list items are active-->
@@ -73,30 +91,18 @@ include "defaultscripts.php";
                 <tr>
                     <th>Order #</th>
                     <th>Submit Time</th>
-                    <th>Status</th>
                     <th>Pickup Time</th>
                     <th>Items</th>
                     <th>Price</th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>10:41AM March 2nd, 2017</td>
-                    <td><span class="label label-info">Picked Up</span></td>
-                    <td>3:00PM March 2nd, 2017</td>
-                    <td>10 Grapes, 2 Oranges</td>
-                    <td>$20.00</td>
-                    <td><a href="orderSubmit.php">Reorder</a></td>
-                    <!--Not sure how to move forward dynamically posting the order history, whether it goes in the order class
-                     or to create a one time file call, or to create a history object since we will be gathering history data
-                     from the db in other places...-->
-                </tr>
+                <?php echo $order->returnOrderHistory();?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+    <?php var_dump(get_defined_vars())?>
 </body>
 </html>
