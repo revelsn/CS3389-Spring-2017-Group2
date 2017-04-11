@@ -1,28 +1,4 @@
-<?php session_start(); //starting the session for user login page ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="Login page">
-<meta name="author" content="Wiggly Piggly Family Store">
-
-<title>Login for Wiggly Piggly</title>
-<?php
-/**
- * This webpage is the login webpage for customers, employees, and admins of piggly wiggly. Currently it directs
- * to the DBaccess.php file but will ultimately direct to the individual dashboard pages for the 3 roles. The webpage
- * uses a form with two fields, email and password, to gather info and pass along that data to a php file that will
- * hash the password and check that data against the db for a user account.
- * TODO: Remember me checkbox does not work
- */
-include 'defaultscripts.php';
-?>
-  </head>
-
-  <body>
+<?php include "header.php";?>
 
     <div class="container">
         <form action="register.php">
@@ -60,5 +36,4 @@ include 'defaultscripts.php';
       </form>
 
     </div> <!-- /container -->
-  </body>
-</html>
+<?php include 'footer.php';?>

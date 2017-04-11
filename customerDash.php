@@ -1,55 +1,4 @@
-<?php session_start(); //starting the session for user login page
-//if user is not signed in or does not have the correct permission (roleID)
-//then log them out and toss them to login page with error
-include "defaultscripts.php";
-include "Database.php";
-include "Order.php";
-include "DBInventory.php";
-//user check should happen before checking for order
-if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
-    require_once('logout.php');
-    header("location:login.php?err=3");
-    die();
-}
-//unserialize order if set else create new order object.
-$order = "";
-if (!isset($_SESSION['currentOrder'])) {
-    $order = new Order();
-} else {
-    $order = unserialize($_SESSION['currentOrder']);
-}
-
-//if user just added an item then add to order
-if(isset($_GET['action']) && $_GET['action']=="add") {
-    //check to see if customer is creating a new order or adding to order
-    if (!isset($_SESSION['currentOrder'])) {
-        //Customer is adding the first item to an order, so we need to create an order in the db,
-        //create an orderLine in the db for this item, and attach the order to this customer
-        $order->setCustomerID($_SESSION['user']);
-        $order->createOrder();
-    } else {
-        $order->addToOrder();
-
-    }
-    $_SESSION['currentOrder'] = serialize($order);
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Wiggly Piggly User Dashboard</title>
-
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-</head>
-
-<body>
+<?php include 'header.php';?>
 <div class="container-fluid">
     <!--See customerOrderHistory.php for comment on the div code below this tag, TLDR, it may need to be dynamically
     generated to reduce duplicate code-->
@@ -60,7 +9,9 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
 
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button> <a class="navbar-brand" href="#">Wiggly Piggly</a>
+                    </button> <a class="navbar-brand" href="#">
+        <img alt="Brand" src="wigglypiggly.png" style="width: 25px;height: 25px">
+      </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -72,9 +23,15 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
                             <a href="customerOrderHistory.php">Order History</a>
                         </li>
                     </ul>
+                    <form class="navbar-form navbar-left" role="search" action="<?php header('Location:customerDash.php?action=search')?>" method="post">
+  					<div class="form-group">
+    				<input type="text" class="form-control" placeholder="Search" name="search">
+  					</div>
+  					<button type="submit" class="btn btn-default">Submit</button>
+					</form>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php $order->getCustomerID()?><strong class="caret"></strong></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $order->getCustomerID();?><strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="#">Profile</a>
@@ -95,7 +52,12 @@ if(isset($_GET['action']) && $_GET['action']=="add") {
             <div class="row" ><?php var_dump(get_defined_vars())?></div>
             <div class="row">
                 <?php
-                echo returnInStockInv();
+                if (isset($_POST['action']) && $_POST['action'] == 'search') {
+                	echo itemSearch();
+                } else {
+                	echo returnInStockInv();
+                }
+                
                 ?>
             </div>
         </div>

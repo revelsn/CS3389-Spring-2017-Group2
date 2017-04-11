@@ -1,46 +1,4 @@
-<?php session_start();
-/**
- * Created by PhpStorm.
- * User: EDWid
- * Date: 3/26/2017
- * Time: 7:07 PM
- */
-include "defaultscripts.php";
-include "Database.php";
-include "Order.php";
-include "DBInventory.php";
-
-//if (!isset($_SESSION["user"]) || $_SESSION['role'] != 0) {
-//    require_once('logout.php');
-//    header("location:login.php?err=3");
-//    die();
-//}
-
-//unserialize order if set else create new order object.
-$order = "";
-if (!isset($_SESSION['currentOrder'])) {
-    $order = new Order();
-} else {
-    $order = unserialize($_SESSION['currentOrder']);
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Wiggly Piggly User Dashboard</title>
-
-
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-</head>
-
-<body>
-
+<?php include 'header.php';?>
 <div class="container-fluid">
 
     <!--This navigation bar code, the div below this comment, should probably be moved into a file that gets called
@@ -67,7 +25,7 @@ if (!isset($_SESSION['currentOrder'])) {
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">*Customer Name*<strong class="caret"></strong></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $order->getCustomerID();?><strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="#">Profile</a>
@@ -104,5 +62,5 @@ if (!isset($_SESSION['currentOrder'])) {
     </div>
 </div>
     <?php var_dump(get_defined_vars())?>
-</body>
-</html>
+</div>
+<?php include 'footer.php';?>
