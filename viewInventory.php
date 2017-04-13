@@ -1,4 +1,5 @@
 <?php include 'header.php';?>
+<?php include 'returnInventory';?>
 <div class="container-fluid">
 
     <!--This navigation bar code, the div below this comment, should probably be moved into a file that gets called
