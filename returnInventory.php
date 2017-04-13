@@ -30,8 +30,6 @@ function returnInventory() {
             "</td><td>"
             .$row['price'].
             "</td><td>"
-            .$row['outOfStock'].
-            "</td><td>"
             .$row['quantity'].
             "</td><td>"
             .
