@@ -56,7 +56,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php echo $order->returnInventory();?>
+                <?php echo returnInventory();?>
                 </tbody>
             </table>
         </div>
