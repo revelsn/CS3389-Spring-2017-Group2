@@ -1,5 +1,5 @@
 <?php include 'header.php';?>
-<?php include 'returnInventory';?>
+<?php include 'returnInventory.php';?>
 <div class="container-fluid">
 
     <!--This navigation bar code, the div below this comment, should probably be moved into a file that gets called
@@ -17,9 +17,7 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li >
-                            <a href="returnInventory.php">View All Products We Sell</a>
-                        </li>
+                     
                         <li class="active">
                             <a href="lowOnStock.php">Items Low on Stock</a>
                         </li>
@@ -54,6 +52,7 @@
                     <th>Category ID</th>
                     <th>Price</th>
                     <th>Out of Stock</th>
+                    <th>Quantity</th>
                 </tr>
                 </thead>
                 <tbody>
