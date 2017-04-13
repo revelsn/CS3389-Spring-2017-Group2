@@ -34,6 +34,9 @@
 			}
 			$_SESSION['currentOrder'] = serialize($order);
 		}
+		if (isset($_GET['delete'])) {
+			$order->deleteItem($_GET['delete']);
+		}
 	}
 
 		

@@ -180,7 +180,7 @@ class Order
         $db = new Database();
         $db->_construct();
         //setup query and bind params
-        $db->query('SELECT i.itemName, quantity, totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID');
+        $db->query('SELECT i.itemID, i.itemName, quantity, totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID');
         $db->bind(':customerID', $_SESSION["user"]);
         //request the entire table
         $table = $db->resultset();
@@ -193,11 +193,52 @@ class Order
                     <td>" . $row['itemName'] . "</td>
                     <td>$" . $row['totalPrice'] . "</td>
                     <td>" . $row['quantity'] . "</td>
+					<td><a href='customerDash.php?delete=".$row['itemID']."'><span class='glyphicon glyphicon-remove' aria-hidden='true'></td>
                   </tr>";
         }
 
         return $html;
 
+    }
+    
+    function deleteItem($item)
+    {
+    	$db = new Database();
+    	$db->_construct();
+    	//setup db connection
+    	
+    	//setup query and bind params, been copied out to logout.php, may need to be pulled out to class.
+    	$db->query('SELECT orderID FROM Orders WHERE customerID = :customerID AND status = "In Progress"');
+    	$db->bind(':customerID', $this->getCustomerID());
+    	//request the single row
+    	$row = $db->single();
+    	$this->setOrderID($row['orderID']);
+    	
+    	//to get total price a select to grab the price of the item is necessary from the items table
+    	$db->query('SELECT price FROM Items WHERE itemID = :itemID');
+    	$db->bind(':itemID', $item);
+    	$itemPrice = $db->single();
+    	
+    	//check if item is in order already, if yes then increment, if not then insert line
+    	$db->query('SELECT EXISTS(SELECT * FROM OrderLine WHERE itemID = :itemID AND orderID = :orderID) AS "itemExists"');
+    	$db->bind(':itemID', $item);
+    	$db->bind(':orderID', $this->getOrderID());
+    	$itemExists = $db->single();
+    	//check if item exists in the order already
+    	if ($itemExists['itemExists'] == 1) {
+    		
+    		$db->query('DELETE FROM OrderLine WHERE orderID = :orderID AND itemID = :itemID');
+    		$db->bind(':itemID', $item);
+    		$db->bind(':orderID', $this->getOrderID());
+    		$db->execute();
+    		
+    	}
+    	//set running Order total
+    	//setup query and bind params, been copied out to logout.php, may need to be pulled out to class.
+    	$db->query('SELECT sum(totalPrice) as "total" FROM OrderLine WHERE orderID = :orderID;');
+    	$db->bind(':orderID', $this->getOrderID());
+    	$total = $db->single();
+    	$this->setRunningTotal($total['total']);
     }
 
     /**
