@@ -51,7 +51,6 @@
                     <th>Image</th>
                     <th>Category ID</th>
                     <th>Price</th>
-                    <th>Out of Stock</th>
                     <th>Quantity</th>
                 </tr>
                 </thead>

@@ -11,7 +11,7 @@ function returnItemsLowOnStock() {
     $db->_construct();
     //setup query and bind params
     //get order being worked on
-    $db->query('SELECT itemID, itemName, image, categoryID, price, outOfStock, quantity FROM Items WHERE quantity <= 5');
+    $db->query('SELECT itemID, itemName, image, categoryID, price, quantity FROM Items WHERE quantity <= 5');
     //$db->bind(':customerID', $_SESSION["user"]);
     //request the entire table
     $table = $db->resultset();
@@ -29,8 +29,6 @@ function returnItemsLowOnStock() {
             .$row['categoryID'].
             "</td><td>"
             .$row['price'].
-            "</td><td>"
-            .$row['outOfStock'].
             "</td><td>"
             .$row['quantity'].
             "</td><td>"
