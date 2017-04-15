@@ -11,7 +11,7 @@ function returnInStockInv() {
     $db = new Database();
     $db->_construct();
     //setup query and bind params
-    $db->query('SELECT i.itemID, i.itemName, i.price, i.outOfStock, c.categoryName FROM Items i INNER JOIN Category c ON i.categoryID=c.categoryID WHERE outOfStock = "N" ORDER BY i.itemName');
+    $db->query('SELECT i.itemID, i.itemName, i.price, c.categoryName FROM Items i INNER JOIN Category c ON i.categoryID=c.categoryID ORDER BY i.itemName');
     //request the entire table
     $table = $db->resultset();
 

@@ -1,4 +1,12 @@
 <?php include 'header.php';?>
+<!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <div class="container-fluid" style="padding-top: 30px">
 	<div class="row">
 	        <div class="col-md-12">
@@ -58,16 +66,27 @@
 		                </thead>
 		                <tbody>
 		                <?php
-		                echo $order->returnCurrentOrderItems();
+		                echo $order->returnCurrentOrderItems('customerOrderSubmit');
 		                ?>
 		                </tbody>
 		            </table> 
 		            <h3>
 		            <span class="label label-primary" style="display: block"><?php echo "Total: $".$order->getRunningTotal();?></span>
 		            </h3>
-		          
+		            TODO: This is where the calendar selector should be located...
+		            
+		            <input type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
+					<script type="text/javascript">
+					$(function() {
+					    $('input[name="daterange"]').daterangepicker();
+					});
+					</script>
+		            
+		          	<form action="customerDash.php?">
 		            <button type="button" class="btn btn-primary btn-lg btn-block">
 		                Submit Order
 		            </button>
+		            </form>
+		            
 	</div>
 </div>

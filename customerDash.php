@@ -100,13 +100,15 @@
 	                </thead>
 	                <tbody>
 	                <?php
-	                echo $order->returnCurrentOrderItems();
+	                echo $order->returnCurrentOrderItems('customerDash');
 	                ?>
 	                </tbody>
 	            </table> <h3><span class="label label-primary" style="display: block"><?php echo "Total: $".$order->getRunningTotal();?></span></h3>
-	            <button type="button" class="btn btn-primary btn-lg btn-block">
+	            <form action="customerOrderSubmit.php">
+	            <button type="submit" class="btn btn-primary btn-lg btn-block">
 	                Submit Order
-	            </button>
+	            </button> 
+	            </form>
 	        </div>
     </div>
 </div>

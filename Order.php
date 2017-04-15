@@ -173,14 +173,14 @@ class Order
      * for every item currently in their order
      * @return string - html code
      */
-    function returnCurrentOrderItems()
+    function returnCurrentOrderItems($pagename)
     {
 
         //create database object
         $db = new Database();
         $db->_construct();
         //setup query and bind params
-        $db->query('SELECT i.itemID, i.itemName, quantity, totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID');
+        $db->query('SELECT i.itemID, i.itemName, ol.quantity, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID');
         $db->bind(':customerID', $_SESSION["user"]);
         //request the entire table
         $table = $db->resultset();
@@ -193,7 +193,7 @@ class Order
                     <td>" . $row['itemName'] . "</td>
                     <td>$" . $row['totalPrice'] . "</td>
                     <td>" . $row['quantity'] . "</td>
-					<td><a href='customerDash.php?delete=".$row['itemID']."'><span class='glyphicon glyphicon-remove' aria-hidden='true'></td>
+					<td><a href='".$pagename.".php?delete=".$row['itemID']."'><span class='glyphicon glyphicon-remove' aria-hidden='true'></td>
                   </tr>";
         }
 
@@ -274,7 +274,7 @@ class Order
         $itemPrice = $db->single();
 
         //Now add the item to the order by inserting into OrderLine table
-        $db->query('INSERT INTO OrderLine (orderID, itemID, quantity, totalPrice, outOfStock) VALUES (:orderID, :itemID, 1, :totalPrice, "N")');
+        $db->query('INSERT INTO OrderLine (orderID, itemID, quantity, totalPrice) VALUES (:orderID, :itemID, 1, :totalPrice)');
         $db->bind(':orderID', $this->getOrderID());
         $db->bind(':itemID', $_GET['itemID']);
         $db->bind(':totalPrice', $itemPrice['price']);
@@ -324,7 +324,7 @@ class Order
             $db->execute();
         } else {
             //if not, then add to order
-            $db->query('INSERT INTO OrderLine (orderID, itemID, quantity, totalPrice, outOfStock) VALUES (:orderID, :itemID, 1, :totalPrice, "N")');
+            $db->query('INSERT INTO OrderLine (orderID, itemID, quantity, totalPrice) VALUES (:orderID, :itemID, 1, :totalPrice)');
             $db->bind(':orderID', $this->getOrderID());
             $db->bind(':itemID', $_GET['itemID']);
             $db->bind(':totalPrice', $itemPrice['price']);
