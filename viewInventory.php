@@ -1,6 +1,6 @@
 <?php include 'header.php';?>
 <?php include 'returnInventory.php';?>
-<div class="container-fluid">
+<div class="container-fluid"  style="padding-top: 30px">
 
     <!--This navigation bar code, the div below this comment, should probably be moved into a file that gets called
     because it is simply duplicate code that will appear in all of the customer pages with minor variations,

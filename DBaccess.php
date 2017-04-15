@@ -24,12 +24,15 @@ function SignIn()
 	{
 		//send user to customerDash
         $_SESSION["user"] = $email;
-        if ($row['roleID'] == 0) {
-            $_SESSION["role"] = 0;
+        if ($row['roleID'] == 'C') {
+            $_SESSION["role"] = 'C';
             header("location:customerDash.php");
-        } else if ($row['roleID'] == 1) {
-            $_SESSION["role"] = 1;
+        } else if ($row['roleID'] == 'E') {
+            $_SESSION["role"] = 'E';
             header("location:employeeDash.php");
+        } else if ($row['roleID'] == 'A') {
+        	$_SESSION["role"] = 'A';
+        	header("location:AdminHome.php");
         }
 
 	} else {
