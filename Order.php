@@ -167,6 +167,32 @@ class Order
     {
         $this->pickUpTime = $pickUpTime;
     }
+    
+    function orderReset()
+    {
+    	$this->setCustomerID(null);
+    	$this->setCustomerName(null);
+    	$this->setEmployeeID(null);
+    	$this->setNumItems(null);
+    	$this->setOrderID(null);
+    	$this->setPickUpTime(null);
+    	$this->setRunningTotal(null);
+    	$this->setStatus(null);
+    	$this->setSubmitTime(null);
+    	
+    }
+    
+    function submit($date)
+    {
+    	$db = new Database();
+    	$db->_construct();
+    	//setup query and bind params
+    	$db->query('UPDATE Orders SET pickupTime = :date, status = "Submitted" WHERE orderID = :orderID');
+    	$db->bind(':orderID', $this->orderID);
+    	$db->bind(':date', $date);
+    	//request the entire table
+    	$db->execute();
+    }
 
     /**
      * This method returns a string containing html of table rows
@@ -180,8 +206,9 @@ class Order
         $db = new Database();
         $db->_construct();
         //setup query and bind params
-        $db->query('SELECT i.itemID, i.itemName, ol.quantity, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID');
+        $db->query('SELECT i.itemID, i.itemName, ol.quantity, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID AND o.orderID = :orderID');
         $db->bind(':customerID', $_SESSION["user"]);
+        $db->bind(":orderID", $this->getOrderID());
         //request the entire table
         $table = $db->resultset();
 

@@ -4,7 +4,7 @@
 	include "Order.php";
 	include "DBInventory.php";
 	echo '';
-	if ((!isset($_SESSION["user"]) || $_SESSION['role'] != 0) && !stristr($_SERVER["PHP_SELF"], 'login')) {
+	if ((!isset($_SESSION["user"]) || $_SESSION['role'] != 0) && !stristr($_SERVER["PHP_SELF"], 'login') && !stristr($_SERVER["PHP_SELF"], 'register')) {
 		require_once('logout.php');
 		header("location:login.php?err=3");
 		die();
@@ -33,7 +33,10 @@
 				
 			}
 			$_SESSION['currentOrder'] = serialize($order);
+		} else if (isset($_GET['action']) && $_GET['action'] == "submit" && isset($_SESSION['currentOrder'])) {
+			$order->submit();
 		}
+			
 		if (isset($_GET['delete'])) {
 			$order->deleteItem($_GET['delete']);
 		}
@@ -51,7 +54,7 @@ echo '<!DOCTYPE html>
 	<meta name="description" content="Login page">
 	<meta name="author" content="Wiggly Piggly Family Store">
 
-	<title>Login for Wiggly Piggly</title>
+	<title>Wiggly Piggly</title>
 	<!-- jQuery (necessary for Bootstrap"s JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 			<!-- Latest compiled and minified CSS -->
