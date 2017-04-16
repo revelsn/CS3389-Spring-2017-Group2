@@ -84,7 +84,7 @@
 	            <h3 class="text-center">
 	                Your Cart - 0 Items
 	            </h3>
-	            <table class="table">
+	            <table class="table table-striped table-hover">
 	                <thead>
 	                <tr>
 	                    <th>

@@ -11,7 +11,8 @@
 
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button> <a class="navbar-brand" href="#">Wiggly Piggly</a>
+                    </button> <a class="navbar-brand" href="#"><img alt="Brand" src="wigglypiggly.png" style="width: 25px;height: 25px"></a>
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,7 +45,7 @@
 <div class="container">
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>Order #</th>
@@ -61,6 +62,5 @@
         </div>
     </div>
 </div>
-    <?php var_dump(get_defined_vars())?>
 </div>
 <?php include 'footer.php';?>

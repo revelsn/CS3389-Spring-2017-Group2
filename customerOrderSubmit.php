@@ -75,7 +75,7 @@
 		            <h3 class="text-center">
 		                Submit Order
 		            </h3>
-		            <table class="table">
+		            <table class="table table-striped">
 		                <thead>
 		                <tr>
 		                    <th>
@@ -123,7 +123,7 @@
           if (isset($error_id) && array_key_exists($error_id, $errors)) {
               echo '<div class="alert alert-danger" role="alert">'.$errors[$error_id].'</div>';
           }
-          var_dump(get_defined_vars());
+         
           ?>
 		            
 	</div>
