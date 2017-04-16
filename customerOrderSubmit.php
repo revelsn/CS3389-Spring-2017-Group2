@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	$(function() {
 	    $('.datepicker').datepicker({
+	    	daysOfWeekDisabled: '06',
 		    format: 'mm-dd-yyyy',
 			startDate: '0d',
 		    endDate: '+6d'
@@ -48,7 +49,7 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="customerDash.php">Create Order</a></li>
+							<li><a href="customerDash.php">Create Order</a></li>
 							<li><a href="customerOrderHistory.php">Order History</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -103,7 +104,7 @@
 			            <input type="text" class="timepicker form-control" name="time" readonly="readonly" value="10:00 AM" required>
 	 					
 						
-			            <button type="submit" class="btn btn-primary ">
+			            <button type="submit" class="btn btn-danger ">
 			                Submit Order
 			            </button>
 		            </form>

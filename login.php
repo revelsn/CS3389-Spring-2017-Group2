@@ -18,14 +18,20 @@
           // does not match the info given by the user
           $errors = array (
               2 => "Failed Authentication! Try again.",
-              3 => "You need to login to access that page."
+              3 => "You need to login to access that page.",
+        	  5 => "Order submitted successfully!"
           );
 
           $error_id = isset($_GET['err']) ? (int)$_GET['err'] : 0;
           if (isset($error_id) && array_key_exists($error_id, $errors)) {
-              echo '<div class="alert alert-danger" role="alert">'.$errors[$error_id].'</div>';
+              if($error_id == 5) {
+              	echo '<div class="alert alert-success" role="success">'.$errors[$error_id].'</div>';
+              } else {
+              	echo '<div class="alert alert-danger" role="alert">'.$errors[$error_id].'</div>';
+              }
+          		
           }
-
+			
           ?>
 
       </form>

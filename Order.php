@@ -399,16 +399,31 @@ class Order
         $db->bind(':customerID', $_SESSION["user"]);
         //request the entire table
         $table = $db->resultset();
+        $db->query('SELECT ol.orderID, ol.quantity, i.itemName, i.price, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID');
+        $items = $db->resultset();
         $html = "";
+        $orderItems = array();
+        $orderPrice = 0;
         //loop through all the items the query found and create some HTML code to show it to the customer
         foreach ($table as $row) {
+        	
+        	
+        	
             $html .= "<tr>
                     <td>".$row['orderID']."</td>
                     <td>".$row['submitTime']."</td>
                     <td>".$row['pickUpTime']."</td>
-                    <td>" ."Items in Order..."."</td>
-                    <td>"."Price..."."</td>
+                    <td>";
+		            foreach ($items as $item) {
+		            	if ($item['orderID'] == $row['orderID']) {
+		            		$html .= "<div>".$item['quantity']." ".$item['itemName']." - $".$item['price']."</div>";
+		            		$orderPrice += $item['totalPrice'];
+		            	}
+		            }
+                    $html .= "</td><td>$".$orderPrice."</td>
+					<td><td><a href='customerReorder.php?reorder=".$row['orderID']."'>Reorder <span class='glyphicon glyphicon-fast-forward' aria-hidden='true'></td></td>
                     </tr>";
+            $orderPrice = 0;
         }
 
         return $html;

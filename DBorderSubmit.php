@@ -17,6 +17,7 @@ include "header.php";
 			
 			$order->submit($mysql_timestamp);
 			$order->orderReset();
-			header("Location:logout.php");
+			$_GET['submit'] = 1;
+			header("Location:logout.php?submit=1");
 
 ?>
