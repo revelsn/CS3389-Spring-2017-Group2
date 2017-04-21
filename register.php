@@ -1,8 +1,13 @@
 <?php include 'header.php';?>
     <div class="container">
+    <div class="row">
         <form action="login.php">
             <button class="btn btn-sm btn-success" type="submit" style="float: right">Sign in</button>
         </form>
+        </div>
+        <div class="row">
+       <img alt="Brand" src="wigglypiggly.png" style="width: 200px;height: 200px" class="center-block">
+       </div>
         <!-- This form has first name, last name, email, password, and password confirm fields for the user to input info -->
       <form class="form-signin" action="DBUserRegister.php" method="post" data-toggle="validator">
         <h2 class="form-signin-heading, text-center">Wiggly Piggly <br>User Registration</h2>

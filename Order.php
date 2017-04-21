@@ -184,10 +184,12 @@ class Order
     
     function submit($date)
     {
+    	date_default_timezone_set('America/Chicago');
     	$db = new Database();
     	$db->_construct();
     	//setup query and bind params
-    	$db->query('UPDATE Orders SET pickupTime = :date, status = "Submitted" WHERE orderID = :orderID');
+    	$db->query('UPDATE Orders SET submitTime = :submit, pickupTime = :date, status = "Submitted" WHERE orderID = :orderID');
+    	$db->bind(':submit', $mysql_timestamp = date( 'Y-m-d H:i:s', time()));
     	$db->bind(':orderID', $this->orderID);
     	$db->bind(':date', $date);
     	//request the entire table
@@ -421,7 +423,7 @@ class Order
 		            	}
 		            }
                     $html .= "</td><td>$".$orderPrice."</td>
-					<td><td><a href='customerReorder.php?reorder=".$row['orderID']."'>Reorder <span class='glyphicon glyphicon-fast-forward' aria-hidden='true'></td></td>
+					<td><a href='customerReorder.php?reorder=".$row['orderID']."'>Reorder <span class='glyphicon glyphicon-fast-forward' aria-hidden='true'></td>
                     </tr>";
             $orderPrice = 0;
         }
@@ -429,7 +431,59 @@ class Order
         return $html;
     }
     
-    
+    function returnOrderHistoryEmployee() {
+    	
+    	//create database object
+    	$db = new Database();
+    	$db->_construct();
+    	//setup query and bind params
+    	//get order being worked on
+    	$db->query('SELECT * FROM Orders');
+    	$db->bind(':customerID', $_SESSION["user"]);
+    	//request the entire table
+    	$table = $db->resultset();
+    	$db->query('SELECT ol.orderID, ol.quantity, i.itemName, i.price, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID');
+    	$items = $db->resultset();
+    	$html = "";
+    	$orderItems = array();
+    	$orderPrice = 0;
+    	
+    	//loop through all the items the query found and create some HTML code to show it to the customer
+    	foreach ($table as $row) {
+    		
+    		
+    		
+    		$html .= "<tr>
+                    <td>".$row['orderID']."</td>
+                    <td>".$row['submitTime']."</td>
+                    <td>".$row['pickUpTime']."</td>
+                    <td>";
+    		foreach ($items as $item) {
+    			if ($item['orderID'] == $row['orderID']) {
+    				$html .= "<div>".$item['quantity']." ".$item['itemName']." - $".$item['price']."</div>";
+    				$orderPrice += $item['totalPrice'];
+    			}
+    		}
+    		$html .= "</td><td>$".$orderPrice.'</td>
+					<td>'.$row['status'].'</td>
+					<td>
+						<div class="dropdown">
+					  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    Status
+					    <span class="caret"></span>
+					  	</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li><a href="employeeOrderUpdate.php?id='.$row['orderID'].'&status=rtp">Ready to Pickup</a></li>
+					    <li><a href="employeeOrderUpdate.php?id='.$row['orderID'].'&status=pu">Picked Up</a></li>
+					  	</ul>
+						</div>
+					</td>
+					</tr>';
+    		$orderPrice = 0;
+    	}
+    	
+    	return $html;
+    }
 }
 
 

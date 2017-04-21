@@ -8,7 +8,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button> 
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="customerDash.php">
         		<img alt="Brand" src="wigglypiggly.png" style="width: 25px;height: 25px">
       			</a>
                 </div>
@@ -85,7 +85,7 @@
 	                Your Cart - 0 Items
 	            </h3>
 	            <table class="table table-striped table-hover">
-	                <thead>
+	                <thead style="background: darkgrey">
 	                <tr>
 	                    <th>
 	                        Product
@@ -96,6 +96,7 @@
 	                    <th>
 	                        Quantity
 	                    </th>
+	                    <th></th>
 	                </tr>
 	                </thead>
 	                <tbody>

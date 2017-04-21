@@ -46,13 +46,14 @@
     <div class="row">
         <div class="table-responsive">
             <table class="table table-striped table-hover">
-                <thead>
+                <thead style="background: darkgrey">
                 <tr>
                     <th>Order #</th>
                     <th>Submit Time</th>
                     <th>Pickup Time</th>
                     <th>Items</th>
                     <th>Price</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>

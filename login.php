@@ -1,9 +1,15 @@
 <?php include "header.php";?>
-
+	
     <div class="container">
+    	<div class="row">
+    	
         <form action="register.php">
             <button class="btn btn-sm btn-success" type="submit" style="float: right">Sign up</button>
         </form>
+        </div>
+       <div class="row">
+       <img alt="Brand" src="wigglypiggly.png" style="width: 200px;height: 200px" class="center-block">
+       </div>
       <form class="form-signin" action="DBaccess.php" method="post">
         <h2 class="form-signin-heading, text-center">Wiggly Piggly Sign-in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>

@@ -1,8 +1,7 @@
 <?php include 'header.php';?>
-<?php include 'returnItemsLowOnStock.php';?>
 <div class="container-fluid" style="padding-top: 30px">
 
-   <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
@@ -16,11 +15,11 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="viewInventory.php">Inventory Manager</a>
                         </li>
-                        <li>
-                            <a href="#">View Orders</a>
+                        <li class="active">
+                            <a href="employeeViewOrders.php">View Orders</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -43,26 +42,25 @@
     </div>
 <div class="container">
     <div class="row">
-    <a class="btn btn-default" href="viewInventory.php" role="button">See All Items In Stock</a>
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
                 <thead style="background: darkgrey">
                 <tr>
-                    <th>Item ID</th>
-                    <th>Item Name</th>
-                    <th>Description</th>
-                    <th>Category</th>
+                    <th>Order #</th>
+                    <th>Submit Time</th>
+                    <th>Pickup Time</th>
+                    <th>Items</th>
                     <th>Price</th>
-                    <th>Items on Hand</th>
+                    <th>Status</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php echo returnItemsLowOnStock();?>
+                <?php echo $order->returnOrderHistoryEmployee();?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-    <?php var_dump(get_defined_vars())?>
 </div>
 <?php include 'footer.php';?>

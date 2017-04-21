@@ -11,7 +11,7 @@ function returnInventory() {
     $db->_construct();
     //setup query and bind params
     //get order being worked on
-    $db->query('SELECT * FROM Items');
+    $db->query('SELECT * FROM Items i INNER JOIN Category c on i.categoryID=c.categoryID ORDER BY itemName');
     //$db->bind(':customerID', $_SESSION["user"]);
     //request the entire table
     $table = $db->resultset();
@@ -24,15 +24,13 @@ function returnInventory() {
             "</td><td>"
             .$row['itemName'].
             "</td><td>"
-            .$row['image'].
+            .$row['description'].
             "</td><td>"
-            .$row['categoryID'].
+            .$row['categoryName'].
             "</td><td>"
             .$row['price'].
             "</td><td>"
             .$row['quantity'].
-            "</td><td>"
-            .
             "</td></tr>";
     }
     return $html;

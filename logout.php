@@ -47,7 +47,7 @@ session_destroy();
 if(isset($_GET['submit']) && $_GET['submit']== 1) {
 	header("location:login.php?err=5");
 } else {
-	//header("location:login.php");
+	header("location:login.php");
 }
 
 ?>
