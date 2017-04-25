@@ -21,11 +21,14 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         
-                        <li class="active">
+                         <li class="active">
                             <a href="AdminUsers.php">Users</a>
                         </li>
-                        <li>
+                        <li  >
                             <a href="adminViewInventory.php">Inventory</a>
+                        </li>
+                        <li>
+                            <a href="AdminViewOrders.php">Orders</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -49,14 +52,15 @@
 <div class="container">
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
+            <table class="table table-striped">
+                <thead style="background: darkgrey">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>User Role</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,6 +70,5 @@
         </div>
     </div>
 </div>
-    <?php var_dump(get_defined_vars())?>
 </div>
 <?php include 'footer.php';?>

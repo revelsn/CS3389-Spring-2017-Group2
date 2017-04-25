@@ -15,7 +15,6 @@ function returnUsers() {
     //setup query and bind params
     //get order being worked on
     $db->query('SELECT firstName, lastName, email, telephone, roleID FROM Users');
-    $db->bind(':customerID', $_SESSION["user"]);
     //request the entire table
     $table = $db->resultset();
     $html = "";
@@ -33,13 +32,19 @@ function returnUsers() {
             "</td><td>"
            
             .$row['roleID'].
-            "</td><td>"
-            ."Items in Order...".
-            "</td><td>"
-            ."Price...".
-            "</td><td>"
-            .
-            "</td></tr>";
+            "</td>
+			<td>
+			<div class='dropdown'>
+		  	<button class='btn btn-default dropdown-toggle' type='button' id='dropdownMenu1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'>
+		    Role
+		    <span class='caret'></span>
+		  	</button>
+			<ul class='dropdown-menu' aria-labelledby='dropdownMenu1'>
+		    <li><a href='adminUserUpdate.php?id=c&customer=".$row['email']."'>Customer</a></li>
+		    <li><a href='adminUserUpdate.php?id=a&customer=".$row['email']."'>Admin</a></li>
+			<li><a href='adminUserUpdate.php?id=e&customer=".$row['email']."'>Employee</a></li>
+		  	</ul>
+			</td></tr>";
     }
 
     return $html;

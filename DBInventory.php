@@ -61,9 +61,9 @@ function returnInStockInv() {
             "</span>
 			<span class=\"label label-default\" style=\"display: block\">".
 			$row['categoryName'].
-			"</div>
+			"</span>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
-            </div>";
+            </div></div>";
     }
 
     return $html;
@@ -93,9 +93,9 @@ function itemSearch() {
 			"</span>
 			<span class=\"label label-default\" style=\"display: block\">".
 			$row['categoryName'].
-			"</div>
+			"</span>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
-            </div>";
+            </div></div>";
 	}
 	
 	return $html;
@@ -117,7 +117,7 @@ function returnItemsByCategory() {
 	//loop through all the items the query found and create some HTML code to show it to the customer
 	foreach ($items as $row) {
 		$html .= "<div class=\"col-md-3\">
-            <h3>
+            <div class=\"h3 item\">
 			<span class=\"label label-info\" style=\"display: block\">".
 			$row['itemName'].
 			"</span>
@@ -127,9 +127,9 @@ function returnItemsByCategory() {
 			"</span>
 			<span class=\"label label-default\" style=\"display: block\">".
 			$row['categoryName'].
-			"</h3>
+			"</span>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
-            </div>";
+            </div></div>";
 	}
 	
 	return $html;

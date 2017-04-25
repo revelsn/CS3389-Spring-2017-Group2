@@ -44,7 +44,7 @@
 <div class="container">
     <div class="row">
 	    <div class="col-md-8">
-	    <a class="btn btn-default" href="lowOnStock.php" role="button">See Low Stock Items</a>
+	    <a class="btn btn-default" href="employeeLowOnStock.php" role="button">See Low Stock Items</a>
 	        <div class="table-responsive">
 	            <table class="table table-striped">
 	                <thead style="background: darkgrey">
@@ -111,6 +111,5 @@
 	    </div>
      </div>
 </div>
-    <?php var_dump(get_defined_vars())?>
 </div>
 <?php include 'footer.php';?>

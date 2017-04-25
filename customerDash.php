@@ -91,11 +91,11 @@
 
 	        <div class="col-md-4 sidebar">
 	            <h3 class="text-center">
-	                Your Cart -  <?php
+	                Your Cart <?php
 	                if ($order->numOfItems() == 1) {
-	                	echo $order->numOfItems().' Item';
+	                	echo '- '.$order->numOfItems().' Item';
 	                } elseif ($order->numOfItems() > 1) {
-	                	echo $order->numOfItems().' Items';
+	                	echo '- '.$order->numOfItems().' Items';
 	                }
 	                ?> 
 	            </h3>
@@ -119,7 +119,7 @@
 	                echo $order->returnCurrentOrderItems('customerDash');
 	                ?>
 	                </tbody>
-	            </table> <h3><span class="label label-primary" style="display: block"><?php echo "Total: $".$order->getRunningTotal();?></span></h3>
+	            </table> <h3><span class="label label-primary" style="display: block"><?php if ($order->getRunningTotal() != ''){ echo "Total: $".$order->getRunningTotal();} else {echo "Total: $0.00";}?></span></h3>
 	            <form action="customerOrderSubmit.php">
 	            <button type="submit" class="btn btn-primary btn-lg btn-block">
 	                Submit Order

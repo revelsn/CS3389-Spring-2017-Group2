@@ -22,6 +22,9 @@
                         <li>
                            <a href="adminViewInventory.php">Inventory</a>
                         </li>
+                        <li>
+                            <a href="AdminViewOrders.php">Orders</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">

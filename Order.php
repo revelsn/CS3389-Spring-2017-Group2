@@ -297,9 +297,13 @@ class Order
         //create database object
         $db = new Database();
         $db->_construct();
+        $db->query('SELECT * FROM Users WHERE roleID = "E"');
+        $employees = $db->resultset();
         //setup query, bind params, and execute
-        $db->query('INSERT INTO Orders (customerID) VALUES (:customerID)');
+        $db->query('INSERT INTO Orders (customerID, employeeID) VALUES (:customerID, :employeeID)');
         $db->bind(':customerID', $this->getCustomerID());
+        $db->bind(':employeeID', $employees[array_rand($employees, 1)]['email']);
+        
         $db->execute();
         //create an order
         //$order = new Order();
@@ -430,7 +434,7 @@ class Order
 		            		$orderPrice += $item['totalPrice'];
 		            	}
 		            }
-                    $html .= "</td><td>$".$orderPrice."</td>
+                    $html .= "</td><td>$".number_format($orderPrice, 2)."</td>
 					<td><a href='customerReorder.php?reorder=".$row['orderID']."'>Reorder <span class='glyphicon glyphicon-fast-forward' aria-hidden='true'></td>
                     </tr>";
             $orderPrice = 0;
@@ -447,7 +451,6 @@ class Order
     	//setup query and bind params
     	//get order being worked on
     	$db->query('SELECT * FROM Orders');
-    	$db->bind(':customerID', $_SESSION["user"]);
     	//request the entire table
     	$table = $db->resultset();
     	$db->query('SELECT ol.orderID, ol.quantity, i.itemName, i.price, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID');
@@ -472,7 +475,7 @@ class Order
     				$orderPrice += $item['totalPrice'];
     			}
     		}
-    		$html .= "</td><td>$".$orderPrice.'</td>
+    		$html .= "</td><td>$".number_format($orderPrice, 2).'</td>
 					<td>'.$row['status'].'</td>
 					<td>
 						<div class="dropdown">
@@ -487,6 +490,46 @@ class Order
 						</div>
 					</td>
 					</tr>';
+    		$orderPrice = 0;
+    	}
+    	
+    	return $html;
+    }
+    
+    function returnOrderHistoryAdmin() {
+    	
+    	//create database object
+    	$db = new Database();
+    	$db->_construct();
+    	//setup query and bind params
+    	//get order being worked on
+    	$db->query('SELECT * FROM Orders o INNER JOIN Users u on u.email=o.employeeID');
+    	//request the entire table
+    	$table = $db->resultset();
+    	$db->query('SELECT ol.orderID, ol.quantity, i.itemName, i.price, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID');
+    	$items = $db->resultset();
+    	$html = "";
+    	$orderItems = array();
+    	$orderPrice = 0;
+    	
+    	//loop through all the items the query found and create some HTML code to show it to the customer
+    	foreach ($table as $row) {
+    		
+    		
+    		
+    		$html .= "<tr>
+                    <td>".$row['orderID']."</td>
+                    <td>".$row['submitTime']."</td>
+                    <td>".$row['pickUpTime']."</td>
+                    <td>";
+    		foreach ($items as $item) {
+    			if ($item['orderID'] == $row['orderID']) {
+    				$html .= "<div>".$item['quantity']." ".$item['itemName']." - $".$item['price']."</div>";
+    				$orderPrice += $item['totalPrice'];
+    			}
+    		}
+    		$html .= "</td><td>$".number_format($orderPrice, 2).'</td>
+			<td>'.$row['firstName'].' '.$row['lastName'].'</td></tr>';
     		$orderPrice = 0;
     	}
     	

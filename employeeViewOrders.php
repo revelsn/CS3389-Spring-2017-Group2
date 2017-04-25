@@ -43,7 +43,7 @@
 <div class="container">
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped">
                 <thead style="background: darkgrey">
                 <tr>
                     <th>Order #</th>

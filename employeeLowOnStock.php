@@ -17,13 +17,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="AdminUsers.php">Users</a>
-                        </li>
-                        <li  class="active">
-                            <a href="adminViewInventory.php">Inventory</a>
+                            <a href="employeeViewInventory.php">Inventory Manager</a>
                         </li>
                         <li>
-                            <a href="AdminViewOrders.php">Orders</a>
+                            <a href="employeeViewOrders.php">View Orders</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -46,7 +43,7 @@
     </div>
 <div class="container">
     <div class="row">
-    <a class="btn btn-default" href="adminViewInventory.php" role="button">See All Items In Stock</a>
+    <a class="btn btn-default" href="employeeViewInventory.php" role="button">See All Items In Stock</a>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead style="background: darkgrey">

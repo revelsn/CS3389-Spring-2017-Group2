@@ -75,7 +75,7 @@
 		                Submit Order
 		            </h3>
 		            <table class="table table-striped">
-		                <thead>
+		                <thead style="background: darkgrey">
 		                <tr>
 		                    <th>
 		                        Product
@@ -95,7 +95,7 @@
 		                </tbody>
 		            </table> 
 		            <h3>
-		            <span class="label label-primary" style="display: block"><?php echo "Total: $".$order->getRunningTotal();?></span>
+		            <span class="label label-primary" style="display: block"><?php if ($order->getRunningTotal() != ''){ echo "Total: $".$order->getRunningTotal();} else {echo "Total: $0.00";}?></span>
 		            </h3>
 		            <form class="form-inline col-md-offset-2" action="DBorderSubmit.php" method="post" data-toggle="validator">
 			            Select date/time of pickup: <input type="text" class="datepicker form-control" readonly="readonly" name="date" required/>

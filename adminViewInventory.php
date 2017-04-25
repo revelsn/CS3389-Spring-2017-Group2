@@ -16,12 +16,14 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        
                         <li>
                             <a href="AdminUsers.php">Users</a>
                         </li>
                         <li  class="active">
                             <a href="adminViewInventory.php">Inventory</a>
+                        </li>
+                        <li>
+                            <a href="AdminViewOrders.php">Orders</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -112,6 +114,5 @@
 	    </div>
      </div>
 </div>
-    <?php var_dump(get_defined_vars())?>
 </div>
 <?php include 'footer.php';?>
