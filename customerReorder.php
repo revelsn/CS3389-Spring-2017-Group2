@@ -9,18 +9,20 @@ $db->query('SELECT * FROM Orders WHERE orderID = :orderID');
 $db->bind(':orderID', $_GET['reorder']);
 //request the entire table
 $table = $db->single();
-
+//create new order object to assign into session when logic completes
 $order = new Order();
+//set customer var in order to current user
 $order->setCustomerID($_SESSION['user']);
 $db->query('SELECT itemID, quantity FROM OrderLine WHERE orderID = :orderID');
 $db->bind(":orderID", $_GET['reorder']);
+//now grab all item from the order we are copying
 $items = $db->resultset();
-if ((int)$item['quantity'] > 1) {
+//if the quantity of an item is greater than 1 set get var and create order
+if ((int)current($items)['quantity'] > 1) {
 	$_GET['itemID'] = current($items)['itemID'];
 	$order->createOrder();
-	(int)current($items)['quantity']--;
-	for ($x = 0; $x < (int)current($items)['quantity']; $x++) {
-		$_GET['itemID'] = current($items)['quantity'];
+	for ($x = 0; $x < (int)current($items)['quantity']-1; $x++) {
+		$_GET['itemID'] = current($items)['itemID'];
 		$order->addToOrder();
 	}
 	array_shift($items);

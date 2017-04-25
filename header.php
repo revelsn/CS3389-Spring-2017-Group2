@@ -18,6 +18,7 @@
 			$order = new Order();
 		} else {
 			$order = unserialize($_SESSION['currentOrder']);
+			$order->updateRunningTotal();
 		}
 		
 		//if user just added an item then add to order

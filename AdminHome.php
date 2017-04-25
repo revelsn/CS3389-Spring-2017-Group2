@@ -1,22 +1,48 @@
 <?php include 'header.php';?>
-<div class="container"  style="padding-top: 30px">
-    <h2>Admin Home Page</h2>
-                                       
-  <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Options
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="AdminUsers.php">View all Users</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="adminViewInventory.php">View Inventory</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Orders</a></li>
-      <li role="presentation" class="divider"></li>
-     
-    </ul>
-  </div>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button><a class="navbar-brand" href="AdminHome.php">
+        		<img alt="Brand" src="wigglypiggly.png" style="width: 25px;height: 25px">
+      			</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                         	<a href="AdminUsers.php">Users</a>
+                            
+                        </li>
+                        <li>
+                           <a href="adminViewInventory.php">Inventory</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['user']?><strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="logout.php">Sign out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
 </div>
-
-
-    </body>
+</body>
 
 </html>
 

@@ -21,7 +21,7 @@
                             <a href="AdminUsers.php">Users</a>
                         </li>
                         <li  class="active">
-                            <a href="viewInventory.php">Inventory</a>
+                            <a href="adminViewInventory.php">Inventory</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

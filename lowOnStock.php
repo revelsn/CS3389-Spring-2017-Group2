@@ -20,7 +20,7 @@
                             <a href="viewInventory.php">Inventory Manager</a>
                         </li>
                         <li>
-                            <a href="#">View Orders</a>
+                            <a href="viewInventory.php">View Orders</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

@@ -168,6 +168,25 @@ class Order
         $this->pickUpTime = $pickUpTime;
     }
     
+    function numOfItems()
+    {
+    	$db = new Database();
+    	$db->_construct();
+    	//setup query and bind params
+    	$db->query('SELECT i.itemID, i.itemName, ol.quantity, ol.totalPrice FROM OrderLine ol INNER JOIN Items i ON ol.itemID=i.itemID INNER JOIN Orders o ON o.orderID=ol.orderID WHERE customerID = :customerID AND o.orderID = :orderID');
+    	$db->bind(':customerID', $_SESSION["user"]);
+    	$db->bind(":orderID", $this->getOrderID());
+    	//request the entire table
+    	$table = $db->resultset();
+    	$this->setNumItems(0);
+    	
+    	foreach ($table as $row) {
+    		$this->setNumItems($this->getNumItems() + (int) $row['quantity']);
+    	}
+    	
+    	return $this->getNumItems();
+    }
+    
     function orderReset()
     {
     	$this->setCustomerID(null);
@@ -213,7 +232,6 @@ class Order
         $db->bind(":orderID", $this->getOrderID());
         //request the entire table
         $table = $db->resultset();
-
         $html = "";
         //loop through all the items the query found and create some HTML code to show it to the customer
         //this code is almost completely nonfunctional, only for visuals right now.
@@ -360,12 +378,7 @@ class Order
             $db->execute();
         }
 
-        //set running Order total
-        //setup query and bind params, been copied out to logout.php, may need to be pulled out to class.
-        $db->query('SELECT sum(totalPrice) as "total" FROM OrderLine WHERE orderID = :orderID;');
-        $db->bind(':orderID', $this->getOrderID());
-        $total = $db->single();
-        $this->setRunningTotal($total['total']);
+        $this->updateRunningTotal();
     }
 
     /**
@@ -382,12 +395,7 @@ class Order
         $db->bind(':orderID', $this->getOrderID());
         $total = $db->single();
         $this->setRunningTotal($total['total']);
-
-
-        //TODO Total seems to be working well except when user closes webpage then logs back in,
-        //TODO when a user does this then the total is shown as the first item in the list, not the total
-        //TODO May try killing two birds by logging users out and then back in when they closed the browser window,
-        //TODO which may require additional table to maintain sessions or column in users table.
+        
     }
 
     function returnOrderHistory() {

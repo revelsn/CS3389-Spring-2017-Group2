@@ -1,4 +1,14 @@
 <?php include 'header.php';?>
+<style media="screen" type="text/css">
+.label {
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+.item {
+	border: 5px solid #aaaaaa;
+}
+</style>
 <div class="container-fluid" style="padding-top: 30px">
     <div class="row">
         <div class="col-md-12">
@@ -42,7 +52,6 @@
             
         
         <div class="col-lg-6">
-			<!-- <div class="row" ><?php var_dump(get_defined_vars())?></div> -->
 				<form role="search" method="post" action="customerDash.php?action=search">
 					<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search" name="search">
@@ -82,7 +91,13 @@
 
 	        <div class="col-md-4 sidebar">
 	            <h3 class="text-center">
-	                Your Cart - 0 Items
+	                Your Cart -  <?php
+	                if ($order->numOfItems() == 1) {
+	                	echo $order->numOfItems().' Item';
+	                } elseif ($order->numOfItems() > 1) {
+	                	echo $order->numOfItems().' Items';
+	                }
+	                ?> 
 	            </h3>
 	            <table class="table table-striped table-hover">
 	                <thead style="background: darkgrey">

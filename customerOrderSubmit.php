@@ -70,7 +70,6 @@
 					
 	                    </nav>
 	           </div>
-	</div>
 	<div class="col-md-12">
 		            <h3 class="text-center">
 		                Submit Order

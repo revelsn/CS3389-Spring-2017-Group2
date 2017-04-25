@@ -16,7 +16,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="viewInventory.php">Inventory Manager</a>
+                            <a href="employeeViewInventory.php">Inventory Manager</a>
                         </li>
                         <li>
                             <a href="employeeViewOrders.php">View Orders</a>

@@ -19,7 +19,7 @@ function returnEmployeeInv() {
 	//loop through all the items the query found and create some HTML code to show it to the customer
 	foreach ($table as $row) {
 		$html .= "<div class=\"col-md-3\">
-            <h3>
+            <div class=\"h3 item\">
 			<span class=\"label label-info\" style=\"display: block\">".
 			$row['itemName'].
 			"</span>
@@ -29,7 +29,7 @@ function returnEmployeeInv() {
 			"</span>
 			<span class=\"label label-info\" >".
 			$row['categoryName'].
-			"</h3>
+			"</div>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
             </div>";
 	}
@@ -51,17 +51,17 @@ function returnInStockInv() {
     //loop through all the items the query found and create some HTML code to show it to the customer
     foreach ($table as $row) {
         $html .= "<div class=\"col-md-3\">
-            <h3>
+            <div class=\"h3 item\">
 			<span class=\"label label-info\" style=\"display: block\">".
             $row['itemName'].
             "</span>
 			<img alt='Bootstrap Image Preview' src='grocery_dummy.jpg' class='img-responsive center-block'/>
-			<span class=\"label label-warning\" >$".
+			<span class=\"label label-warning\" style=\"display: block\">$".
             $row['price'].
             "</span>
-			<span class=\"label label-info\" >".
+			<span class=\"label label-default\" style=\"display: block\">".
 			$row['categoryName'].
-			"</h3>
+			"</div>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
             </div>";
     }
@@ -83,17 +83,17 @@ function itemSearch() {
 	//loop through all the items the query found and create some HTML code to show it to the customer
 	foreach ($items as $row) {
 		$html .= "<div class=\"col-md-3\">
-            <h3>
+            <div class=\"h3 item\">
 			<span class=\"label label-info\" style=\"display: block\">".
 			$row['itemName'].
 			"</span>
 			<img alt='Bootstrap Image Preview' src='grocery_dummy.jpg' class='img-responsive center-block'/>
-			<span class=\"label label-warning\" >$".
+			<span class=\"label label-warning\" style=\"display: block\">$".
 			$row['price'].
 			"</span>
-			<span class=\"label label-info\" >".
+			<span class=\"label label-default\" style=\"display: block\">".
 			$row['categoryName'].
-			"</h3>
+			"</div>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
             </div>";
 	}
@@ -122,10 +122,10 @@ function returnItemsByCategory() {
 			$row['itemName'].
 			"</span>
 			<img alt='Bootstrap Image Preview' src='grocery_dummy.jpg' class='img-responsive center-block'/>
-			<span class=\"label label-warning\" >$".
+			<span class=\"label label-warning\" style=\"display: block\">$".
 			$row['price'].
 			"</span>
-			<span class=\"label label-info\" >".
+			<span class=\"label label-default\" style=\"display: block\">".
 			$row['categoryName'].
 			"</h3>
             <a href='customerDash.php?action=add&itemID=" . $row['itemID'] . "' class='btn btn-default btn-block'>Add to Cart</a>
